@@ -16,3 +16,9 @@ coverage
 .turbo
 supabase/.temp
 supabase/.branches
+
+# Claves SSH: nunca al repo
+cuenta_4x
+cuenta_4x.pub
+*.pem
+id_*
