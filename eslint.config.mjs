@@ -3,7 +3,7 @@ import nextTypescript from "eslint-config-next/typescript";
 
 /** @type {import("eslint").Linter.Config[]} */
 const config = [
-  { ignores: [".next/**", "node_modules/**", "next-env.d.ts"] },
+  { ignores: [".next/**", "node_modules/**", "next-env.d.ts", "docs/**"] },
   ...nextCoreWebVitals,
   ...nextTypescript,
 ];

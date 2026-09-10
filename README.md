@@ -207,6 +207,37 @@ Los dos torneos terminados que están cargados son los publicados por la prensa 
 que aparecen en juego y en camino son de muestra, marcados como provisorios, para que se
 vean los tres estados.
 
+## Deploy en Vercel
+
+El repositorio es `leandromasotti/ligatenis` y el hosting es Vercel: cada push a `main`
+publica producción y cada pull request genera su propia URL de preview, útil para mostrarle
+un cambio a la liga sin tocar el sitio publicado.
+
+**Puesta en marcha, una sola vez:** en [vercel.com](https://vercel.com) → _Add New Project_
+→ _Import Git Repository_ → `leandromasotti/ligatenis`. Framework y comandos los detecta
+solo (Next.js). No hay que configurar nada más: **el primer deploy funciona sin ninguna
+variable de entorno**, porque el sitio público todavía no consulta la base.
+
+### Variables de entorno
+
+| Variable                        | Cuándo hace falta                                               |
+| ------------------------------- | --------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`          | Al conectar el dominio propio. Sin ella se usa la URL de Vercel |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Desde el sprint 2, cuando aparezca el login                     |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Desde el sprint 2                                               |
+
+La URL del sitio se resuelve en [`src/lib/sitio.ts`](src/lib/sitio.ts): primero la variable
+explícita, después la URL de producción que Vercel inyecta en el build, y al final el dev
+local. Sin eso, un deploy sin configurar generaría las tarjetas de WhatsApp y Facebook
+apuntando a `localhost`.
+
+### Al llegar el sprint 2
+
+Además de cargar las dos variables de Supabase, hay que configurar en el panel de Supabase
+(_Authentication → URL Configuration_) el **Site URL** y las **Redirect URLs**, incluyendo el
+dominio de Vercel. Es el paso que se olvida siempre: sin él, los mails de verificación y de
+recupero de contraseña llevan a `localhost`.
+
 ## Contacto
 
 Botón flotante de WhatsApp abajo a la derecha en todas las páginas, más enlaces en el pie y

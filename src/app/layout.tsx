@@ -5,6 +5,7 @@ import { BotonWhatsapp } from "@/components/boton-whatsapp";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { urlDelSitio } from "@/lib/sitio";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -20,7 +21,7 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(urlDelSitio()),
   title: {
     default: "Liga Dolorense de Tenis",
     template: "%s · Liga Dolorense de Tenis",
