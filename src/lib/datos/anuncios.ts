@@ -50,7 +50,9 @@ const TODOS: Anuncio[] = [
     icono: "codigo",
     marca: { fondo: "#101820", texto: "#F5F7F6", acento: "#5CC98C" },
     slots: ["cabecera", "listado", "lateral", "pie"],
-    peso: 4,
+    // El peso más bajo: es el sponsor de la casa, así que ocupa las ubicaciones
+    // que sobran y le deja las buenas a los anunciantes que pagan.
+    peso: 1,
   },
   {
     id: "escuela-fernando-calvo",
