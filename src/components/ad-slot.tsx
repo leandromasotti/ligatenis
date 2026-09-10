@@ -5,12 +5,39 @@ export type { SlotPublicidad };
 
 const MARCA_POR_DEFECTO = { fondo: "#101820", texto: "#F5F7F6", acento: "#5CC98C" };
 
-/** Tamaños del logotipo y del ícono según el formato del espacio. */
-const ESCALA: Record<SlotPublicidad, { titulo: string; icono: string; bajada: string }> = {
-  cabecera: { titulo: "text-2xl sm:text-3xl", icono: "h-9 w-9", bajada: "text-[0.9rem]" },
-  listado: { titulo: "text-2xl sm:text-3xl", icono: "h-9 w-9", bajada: "text-[0.9rem]" },
-  lateral: { titulo: "text-3xl", icono: "h-14 w-14", bajada: "text-[0.95rem]" },
-  pie: { titulo: "text-3xl sm:text-5xl", icono: "h-14 w-14 sm:h-16 sm:w-16", bajada: "text-base" },
+/**
+ * Tamaños y disposición por formato. En el celular todos los avisos son
+ * horizontales y más chicos; el lateral se vuelve vertical recién en `lg`, que es
+ * cuando pasa a la columna angosta.
+ */
+const ESCALA: Record<
+  SlotPublicidad,
+  { titulo: string; icono: string; bajada: string; layout: string }
+> = {
+  cabecera: {
+    titulo: "text-xl sm:text-3xl",
+    icono: "h-8 w-8 sm:h-9 sm:w-9",
+    bajada: "text-[0.85rem] sm:text-[0.9rem]",
+    layout: "flex-row text-left",
+  },
+  listado: {
+    titulo: "text-xl sm:text-3xl",
+    icono: "h-8 w-8 sm:h-9 sm:w-9",
+    bajada: "text-[0.85rem] sm:text-[0.9rem]",
+    layout: "flex-row text-left",
+  },
+  lateral: {
+    titulo: "text-2xl lg:text-3xl",
+    icono: "h-10 w-10 lg:h-14 lg:w-14",
+    bajada: "text-[0.88rem] lg:text-[0.95rem]",
+    layout: "flex-row text-left lg:flex-col lg:text-center",
+  },
+  pie: {
+    titulo: "text-2xl sm:text-5xl",
+    icono: "h-10 w-10 sm:h-16 sm:w-16",
+    bajada: "text-[0.9rem] sm:text-base",
+    layout: "flex-row text-left",
+  },
 };
 
 /**
@@ -21,14 +48,11 @@ const ESCALA: Record<SlotPublicidad, { titulo: string; icono: string; bajada: st
 function Banner({ anuncio, slot }: { anuncio: Anuncio; slot: SlotPublicidad }) {
   const marca = anuncio.marca ?? MARCA_POR_DEFECTO;
   const escala = ESCALA[slot];
-  const vertical = slot === "lateral";
 
   return (
     <span
       style={{ backgroundColor: marca.fondo, color: marca.texto }}
-      className={`flex h-full w-full items-center justify-center gap-x-4 gap-y-2 px-4 py-3 ${
-        vertical ? "flex-col text-center" : "flex-col text-center sm:flex-row sm:text-left"
-      }`}
+      className={`flex h-full w-full items-center justify-center gap-x-4 gap-y-2 px-4 py-3 ${escala.layout}`}
     >
       {anuncio.icono && (
         <MarcaIcono nombre={anuncio.icono} color={marca.acento} className={escala.icono} />
@@ -79,11 +103,11 @@ export function EspacioPublicitario({
   className?: string;
 }) {
   const anuncio = elegirAnuncio(slot, clave);
-  const { medida, ratio, altoMin } = MEDIDAS[slot];
+  const { medida, alto } = MEDIDAS[slot];
 
   if (!anuncio) return null;
 
-  const contenedor = `rounded-card w-full overflow-hidden ${ratio} ${altoMin}`;
+  const contenedor = `rounded-card w-full overflow-hidden ${alto}`;
 
   return (
     <aside aria-label="Publicidad" className={`flex w-full flex-col gap-1 ${className ?? ""}`}>

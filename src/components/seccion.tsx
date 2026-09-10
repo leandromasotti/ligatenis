@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 export function Seccion({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <section className={`mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14 ${className ?? ""}`}>
+    <section className={`mx-auto max-w-6xl px-4 py-9 sm:px-6 sm:py-14 ${className ?? ""}`}>
       {children}
     </section>
   );

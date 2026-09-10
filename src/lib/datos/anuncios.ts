@@ -54,8 +54,8 @@ const TODOS: Anuncio[] = [
   },
   {
     id: "escuela-fernando-calvo",
-    titulo: "Escuela de Tenis",
-    bajada: "Fernando Calvo",
+    titulo: "Fernando Calvo",
+    bajada: "Escuela de tenis",
     icono: "raqueta",
     marca: { fondo: "#0E4D2E", texto: "#F2F8F4", acento: "#F2C200" },
     slots: ["cabecera", "listado", "lateral", "pie"],
@@ -123,12 +123,21 @@ const TODOS: Anuncio[] = [
  */
 export const ANUNCIOS: Anuncio[] = TODOS.filter((anuncio) => INCLUIR_DEMO || !anuncio.demo);
 
-/** Medidas estándar IAB, las que se le piden al anunciante. */
-export const MEDIDAS: Record<SlotPublicidad, { medida: string; ratio: string; altoMin: string }> = {
-  cabecera: { medida: "970 × 90", ratio: "aspect-[970/90]", altoMin: "min-h-[88px]" },
-  listado: { medida: "728 × 90", ratio: "aspect-[728/90]", altoMin: "min-h-[88px]" },
-  lateral: { medida: "300 × 600", ratio: "aspect-[300/600]", altoMin: "min-h-[280px]" },
-  pie: { medida: "970 × 250", ratio: "aspect-[970/250]", altoMin: "min-h-[160px]" },
+/**
+ * Medidas de los espacios. `medida` es el formato IAB que se le pide al
+ * anunciante, y `alto` la altura real del hueco en el layout.
+ *
+ * Son alturas fijas y no `aspect-ratio` a propósito. Un banner real no se encoge
+ * en proporción: un leaderboard mide 90 px de alto siempre, y el creativo se
+ * centra. Además, combinar un aspect-ratio ancho con un alto mínimo hace que el
+ * navegador calcule el ANCHO a partir del alto — 970/90 con min-height 128px daba
+ * una caja de 1380 px que desbordaba la página de costado.
+ */
+export const MEDIDAS: Record<SlotPublicidad, { medida: string; alto: string }> = {
+  cabecera: { medida: "970 × 90", alto: "h-[90px]" },
+  listado: { medida: "728 × 90", alto: "h-[90px]" },
+  lateral: { medida: "300 × 600", alto: "h-[132px] lg:h-[600px]" },
+  pie: { medida: "970 × 250", alto: "h-[140px] sm:h-[250px]" },
 };
 
 function hash(texto: string): number {

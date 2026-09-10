@@ -11,8 +11,8 @@
 --     solo se cargan los cuadros de singles
 --
 -- PENDIENTE DE CONFIRMAR:
---   * la lista definitiva de categorías (se cargan 1era a 5ta e Intermedia; quedan
---     activas las que tienen actividad publicada)
+--   * en caballeros no hay Primera (planilla oficial 2024): quedó inactiva
+--   * la lista de cuadros de damas, que sigue sin planilla
 --   * cuántos puntos da cada instancia de un torneo
 --   * la localidad de cada sede
 -- ============================================================================
@@ -34,7 +34,8 @@ on conflict (slug) do nothing;
 --   update public.categorias set activa = true where slug = '2da-damas';
 insert into public.categorias (slug, nivel, genero, modalidad, nombre, orden, activa) values
   ('intermedia-caballeros',  'Intermedia',  'caballeros', 'singles', 'Intermedia Caballeros',  1,  true),
-  ('1ra-caballeros',         '1ra',         'caballeros', 'singles', '1ra Caballeros',         2,  true),
+  -- Inactiva: la planilla oficial 2024 de la liga no tiene Primera en caballeros.
+  ('1ra-caballeros',         '1ra',         'caballeros', 'singles', '1ra Caballeros',         2,  false),
   ('2da-caballeros',         '2da',         'caballeros', 'singles', '2da Caballeros',         3,  true),
   ('3ra-caballeros',         '3ra',         'caballeros', 'singles', '3ra Caballeros',         4,  true),
   ('4ta-caballeros',         '4ta',         'caballeros', 'singles', '4ta Caballeros',         5,  true),

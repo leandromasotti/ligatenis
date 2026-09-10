@@ -69,7 +69,7 @@ export default async function TenistaPage({ params }: Props) {
       </nav>
 
       <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
-        <div className="flex flex-col gap-8">
+        <div className="flex min-w-0 flex-col gap-8">
           <header className="flex flex-wrap items-center gap-5">
             <Avatar nombre={tenista.nombre} className="h-24 w-24 text-2xl" />
             <div className="flex flex-col gap-1.5">

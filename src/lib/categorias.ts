@@ -12,10 +12,12 @@ export type Categoria = {
 };
 
 /**
- * Cuadros activos, como stand-in hasta que el sprint 3 los lea de la tabla
- * `categorias` de Supabase. Coincide con lo que carga la migración 0003: los
- * cuadros de damas sin actividad publicada quedan inactivos hasta confirmarlos
- * con la organización.
+ * Cuadros activos, como stand-in hasta que se lean de la tabla `categorias` de
+ * Supabase. Coincide con lo que carga la migración 0003.
+ *
+ * En caballeros NO hay Primera: la planilla oficial 2024 de la liga lista
+ * Intermedia, Segunda, Tercera, Cuarta y Quinta, y la máxima es Intermedia. Los
+ * cuadros de damas sin actividad publicada quedan inactivos hasta confirmarlos.
  */
 export const CATEGORIAS: Categoria[] = [
   {
@@ -25,14 +27,6 @@ export const CATEGORIAS: Categoria[] = [
     modalidad: "singles",
     nombre: "Intermedia Caballeros",
     orden: 1,
-  },
-  {
-    slug: "1ra-caballeros",
-    nivel: "1ra",
-    genero: "caballeros",
-    modalidad: "singles",
-    nombre: "1ra Caballeros",
-    orden: 2,
   },
   {
     slug: "2da-caballeros",

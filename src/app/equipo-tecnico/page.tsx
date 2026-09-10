@@ -21,7 +21,7 @@ export default async function EquipoTecnicoPage() {
       />
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_300px]">
-        <div className="flex flex-col gap-5">
+        <div className="flex min-w-0 flex-col gap-5">
           <ul className="grid gap-3 sm:grid-cols-2">
             {equipo.map((miembro) => (
               <li

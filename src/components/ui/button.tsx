@@ -4,6 +4,8 @@ import type { ComponentProps, ReactNode } from "react";
 type Variante = "primaria" | "secundaria" | "sutil";
 type Tamano = "md" | "sm";
 
+// Ojo: `base` define el display, así que pasarle `hidden` por className no lo
+// oculta. Para esconder un botón, envolverlo en un contenedor con `hidden`.
 const base =
   "inline-flex items-center justify-center gap-2 rounded-md font-display font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50";
 

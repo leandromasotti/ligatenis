@@ -25,9 +25,12 @@ import type {
  *   }
  */
 
+/** Campeones primero y después por apellido, que es como la liga lista el padrón. */
 function porNombre(a: Tenista, b: Tenista) {
   if (a.campeon !== b.campeon) return a.campeon ? -1 : 1;
-  return a.nombre.localeCompare(b.nombre, "es-AR");
+  const claveA = a.apellido ?? a.nombre;
+  const claveB = b.apellido ?? b.nombre;
+  return claveA.localeCompare(claveB, "es-AR") || a.nombre.localeCompare(b.nombre, "es-AR");
 }
 
 export async function listarCuadros(): Promise<Categoria[]> {

@@ -58,7 +58,7 @@ export default async function CategoriaPage({ params }: Props) {
       />
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_300px]">
-        <div className="flex flex-col gap-5">
+        <div className="flex min-w-0 flex-col gap-5">
           {tenistas.length > 0 ? (
             <>
               <div className="flex items-baseline justify-between gap-3">

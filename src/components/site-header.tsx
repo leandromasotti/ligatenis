@@ -47,12 +47,19 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
-          <BotonLink href="/ingresar" variante="secundaria" tamano="sm" className="hidden sm:flex">
-            Ingresar
-          </BotonLink>
-          <BotonLink href="/registrarme" tamano="sm" className="hidden sm:flex">
-            Registrarme
-          </BotonLink>
+          {/*
+            La visibilidad va en el envoltorio y no en el botón: BotonLink ya trae
+            `inline-flex` en sus clases base y le gana a un `hidden` suelto, así que
+            los botones no se ocultaban y el header desbordaba en el celular.
+          */}
+          <span className="hidden items-center gap-2 sm:flex">
+            <BotonLink href="/ingresar" variante="secundaria" tamano="sm">
+              Ingresar
+            </BotonLink>
+            <BotonLink href="/registrarme" tamano="sm">
+              Registrarme
+            </BotonLink>
+          </span>
           <button
             type="button"
             onClick={() => setAbierto((v) => !v)}

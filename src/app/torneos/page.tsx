@@ -34,7 +34,7 @@ export default async function TorneosPage() {
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_300px]">
-        <div className="flex flex-col gap-10">
+        <div className="flex min-w-0 flex-col gap-10">
           {GRUPOS.map((grupo) => {
             const delGrupo = torneos.filter((torneo) => torneo.estado === grupo.estado);
 

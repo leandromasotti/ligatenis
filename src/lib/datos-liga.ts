@@ -33,7 +33,8 @@ export const JUGADORES: JugadorReferencia[] = [
   { nombre: "Marcelo Obregón", categoriaSlug: "intermedia-caballeros" },
 
   // Singles caballeros · 2da
-  { nombre: "Pablo Pickler", categoriaSlug: "2da-caballeros" },
+  // La prensa escribió "Pickler"; la planilla oficial de la liga dice PICHLER.
+  { nombre: "Pablo Pichler", categoriaSlug: "2da-caballeros" },
   { nombre: "Daniel Gutiérrez", categoriaSlug: "2da-caballeros" },
   { nombre: 'Francisco "Pancho" Mario', categoriaSlug: "2da-caballeros" },
   { nombre: "Fernando Castillo", categoriaSlug: "2da-caballeros" },
@@ -58,12 +59,12 @@ export const JUGADORES: JugadorReferencia[] = [
   { nombre: "Natalia Cornaglia", categoriaSlug: "4ta-damas" },
 ];
 
-/** Cuadros sin nombres publicados, pero que la liga sí juega. */
-export const CUADROS_SIN_PADRON: Record<string, string> = {
-  "4ta-caballeros": "Concentra el grueso de los inscriptos, de clubes locales.",
-  "5ta-caballeros": "Concentra el grueso de los inscriptos, de clubes locales.",
-  "1ra-caballeros": "Padrón a confirmar con la organización.",
-};
+/**
+ * Cuadros que la liga juega pero para los que todavía no hay nombres publicados.
+ * Con el padrón 2024 de caballeros cargado, solo quedarían cuadros de damas si se
+ * activaran los que están inactivos.
+ */
+export const CUADROS_SIN_PADRON: Record<string, string> = {};
 
 export function jugadoresDe(categoriaSlug: string): JugadorReferencia[] {
   return JUGADORES.filter((jugador) => jugador.categoriaSlug === categoriaSlug).sort((a, b) => {

@@ -1,13 +1,20 @@
 import { JUGADORES } from "@/lib/datos-liga";
+import { PADRON_2024 } from "@/lib/datos/padron-2024";
 import type { MiembroEquipo, Tenista, Torneo } from "@/lib/datos/tipos";
 
 /**
  * Datos mock, mientras no hay base de datos.
  *
+ * Dos fuentes, y una precedencia clara:
+ *   1. el padrón oficial de caballeros 2024 que pasó la liga (`padron-2024.ts`)
+ *   2. los nombres que la prensa publicó de los torneos 2026 (`datos-liga.ts`),
+ *      que son más recientes y pisan la categoría del padrón viejo
+ *
  * Regla que se respeta acá: son personas reales, así que los únicos datos que se
- * cargan son los ya publicados (nombre, categoría y si fueron campeones). Los
- * campos del perfil deportivo quedan vacíos a propósito — los carga cada tenista
- * cuando se registre, y la ficha está diseñada para verse bien así.
+ * cargan son los ya publicados por la liga o por la prensa — nombre, categoría y
+ * si fueron campeones. Los campos del perfil deportivo quedan vacíos a propósito:
+ * los carga cada tenista cuando se registre, y la ficha está diseñada para verse
+ * bien así.
  *
  * Para pasar a Supabase se reemplaza solo `src/lib/datos/index.ts`: este archivo
  * se borra y las pantallas no cambian.
@@ -40,12 +47,70 @@ export function slugify(texto: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-export const TENISTAS_MOCK: Tenista[] = JUGADORES.map((jugador) => ({
-  slug: slugify(jugador.nombre),
-  nombre: jugador.nombre,
-  categoriaSlug: jugador.categoriaSlug,
-  campeon: jugador.campeon,
-}));
+/** Clave para cruzar las dos fuentes: sin acentos, sin apodos, sin mayúsculas. */
+function clave(nombreCompleto: string): string {
+  return slugify(nombreCompleto);
+}
+
+function construirPadron(): Tenista[] {
+  const porClave = new Map<string, Tenista>();
+
+  // 1. El padrón oficial 2024.
+  for (const [categoriaSlug, entradas] of Object.entries(PADRON_2024)) {
+    for (const [apellido, nombre] of entradas) {
+      const nombreCompleto = `${nombre} ${apellido}`;
+      porClave.set(clave(nombreCompleto), {
+        slug: slugify(nombreCompleto),
+        nombre: nombreCompleto,
+        apellido,
+        categoriaSlug,
+      });
+    }
+  }
+
+  // 2. Los nombres de 2026: si el tenista ya estaba, se le actualiza la categoría
+  //    y se le marca el título; si no estaba, se agrega.
+  for (const jugador of JUGADORES) {
+    const k = clave(jugador.nombre);
+    const existente = porClave.get(k);
+
+    if (existente) {
+      existente.categoriaSlug = jugador.categoriaSlug;
+      existente.campeon = jugador.campeon;
+      continue;
+    }
+
+    const partes = jugador.nombre
+      .replace(/"[^"]*"/g, "")
+      .trim()
+      .split(/\s+/);
+    porClave.set(k, {
+      slug: slugify(jugador.nombre),
+      nombre: jugador.nombre,
+      apellido: partes[partes.length - 1],
+      categoriaSlug: jugador.categoriaSlug,
+      campeon: jugador.campeon,
+    });
+  }
+
+  // Dos tenistas distintos podrían caer en el mismo slug: se desempata con un
+  // sufijo para que ninguna ficha se pise con otra.
+  const usados = new Set<string>();
+  for (const tenista of porClave.values()) {
+    let candidato = tenista.slug;
+    let n = 1;
+    while (usados.has(candidato)) {
+      n += 1;
+      candidato = `${tenista.slug}-${n}`;
+    }
+    usados.add(candidato);
+    tenista.slug = candidato;
+  }
+
+  return [...porClave.values()];
+}
+
+export const TENISTAS_MOCK: Tenista[] = construirPadron();
 
 /**
  * Equipo técnico. Carlos Lanz es el encargado de la liga; los demás roles son la

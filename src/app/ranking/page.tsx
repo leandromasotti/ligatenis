@@ -60,7 +60,7 @@ export default async function RankingPage() {
       </div>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_300px]">
-        <div className="flex flex-col gap-3">
+        <div className="flex min-w-0 flex-col gap-3">
           <div className="flex items-baseline justify-between gap-3">
             <h3 className="eyebrow text-muted">Padrón por categoría</h3>
             <AvisoProvisorio />

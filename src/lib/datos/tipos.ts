@@ -10,7 +10,10 @@ export type Reves = "una_mano" | "dos_manos";
  */
 export type Tenista = {
   slug: string;
+  /** Nombre completo, como se muestra: "Martín Isaurralde". */
   nombre: string;
+  /** Solo el apellido, para ordenar el padrón como lo lista la liga. */
+  apellido?: string;
   categoriaSlug: string;
   /** Campeón del 1° Torneo 2026 de su cuadro. */
   campeon?: boolean;
