@@ -1,0 +1,361 @@
+<title>Después del MVP</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#FBFCFA;
+  --surface:#FFFFFF;
+  --surface-2:#F2F6F1;
+  --ink:#12211A;
+  --ink-2:#3E4F46;
+  --muted:#6B7C72;
+  --line:#DCE5DE;
+  --line-strong:#BFCDC3;
+  --verde:#16794A;
+  --verde-soft:#E4F1E9;
+  --celeste:#0E7391;
+  --celeste-soft:#E1F1F6;
+  --amarillo:#F2C200;
+  --amarillo-soft:#FBF1CC;
+  --amarillo-ink:#5C4600;
+  --shadow:0 1px 2px rgba(18,33,26,.05);
+  --maxw:74rem;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B1310;
+    --surface:#121D18;
+    --surface-2:#18261F;
+    --ink:#E7EFE9;
+    --ink-2:#B7C6BC;
+    --muted:#8A9C91;
+    --line:#25352C;
+    --line-strong:#3A4E42;
+    --verde:#5CC98C;
+    --verde-soft:#14301F;
+    --celeste:#63C6E2;
+    --celeste-soft:#0F2A33;
+    --amarillo:#F5CE3A;
+    --amarillo-soft:#332A08;
+    --amarillo-ink:#F5CE3A;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B1310;
+  --surface:#121D18;
+  --surface-2:#18261F;
+  --ink:#E7EFE9;
+  --ink-2:#B7C6BC;
+  --muted:#8A9C91;
+  --line:#25352C;
+  --line-strong:#3A4E42;
+  --verde:#5CC98C;
+  --verde-soft:#14301F;
+  --celeste:#63C6E2;
+  --celeste-soft:#0F2A33;
+  --amarillo:#F5CE3A;
+  --amarillo-soft:#332A08;
+  --amarillo-ink:#F5CE3A;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  font-size:16.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+h1,h2,h3,h4{font-family:Archivo,"Arial Narrow",system-ui,sans-serif;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,5.4vw,3.4rem);font-weight:700;letter-spacing:-.026em;line-height:1.04}
+h2{font-size:clamp(1.35rem,2.6vw,1.72rem);font-weight:600;letter-spacing:-.017em;line-height:1.15}
+h3{font-size:1.06rem;font-weight:600;letter-spacing:-.008em}
+p{margin:0}
+a{color:var(--celeste)}
+
+header.top{border-bottom:1px solid var(--line);background:var(--surface)}
+.top-inner{display:flex;flex-direction:column;gap:1.6rem;padding-top:clamp(2rem,5vw,3.4rem);padding-bottom:clamp(1.7rem,4vw,2.6rem)}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand svg{flex:none}
+.brand span{font-family:Archivo,sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--verde)}
+.lede{max-width:62ch;color:var(--ink-2);font-size:1.08rem}
+.facts{display:flex;flex-wrap:wrap;gap:0 2.4rem;border-top:1px solid var(--line);padding-top:1.15rem}
+.fact{display:flex;flex-direction:column;gap:.1rem;padding:.35rem 0}
+.fact dt{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.fact dd{margin:0;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:1.02rem;color:var(--ink)}
+.fact dd em{font-style:normal;color:var(--muted);font-size:.82rem}
+
+main{padding-bottom:4rem}
+section{padding-top:clamp(2.4rem,5vw,3.5rem)}
+.sec-head{display:flex;align-items:baseline;gap:.85rem;margin-bottom:1.1rem;flex-wrap:wrap}
+.sec-head .num{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--verde);border:1px solid var(--line-strong);border-radius:3px;padding:.1rem .38rem;flex:none}
+.sec-head p{color:var(--muted);font-size:.9rem}
+.prose{max-width:66ch;display:flex;flex-direction:column;gap:.85rem;color:var(--ink-2)}
+.prose strong{color:var(--ink);font-weight:600}
+
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:40rem;font-size:.94rem}
+thead th{
+  text-align:left;font-family:Archivo,sans-serif;font-weight:600;font-size:.7rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  padding:.7rem .9rem;border-bottom:1px solid var(--line-strong);white-space:nowrap;
+}
+tbody td{padding:.7rem .9rem;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:none}
+td.k{color:var(--ink);font-weight:600}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+tfoot td{padding:.7rem .9rem;border-top:1px solid var(--line-strong);font-weight:600;color:var(--ink);background:var(--surface-2)}
+tfoot td.n{font-family:"IBM Plex Mono",monospace}
+.code{font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--verde)}
+
+.chip{display:inline-block;font-family:Archivo,sans-serif;font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.16rem .42rem;border-radius:3px;white-space:nowrap}
+.chip.ya{background:var(--verde-soft);color:var(--verde)}
+.chip.espera{background:var(--celeste-soft);color:var(--celeste)}
+.chip.hecho{background:var(--surface-2);color:var(--muted)}
+.chip.plata{background:var(--amarillo-soft);color:var(--amarillo-ink)}
+
+.paquetes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem}
+.paq{border:1px solid var(--line);border-radius:6px;background:var(--surface);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.7rem;padding:1.2rem}
+.paq .cab{display:flex;align-items:baseline;justify-content:space-between;gap:.7rem}
+.paq .dp{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--verde);font-size:1.15rem}
+.paq ul{margin:0;padding-left:1.05rem;display:flex;flex-direction:column;gap:.28rem;font-size:.9rem;color:var(--ink-2)}
+.paq .pie{margin-top:auto;padding-top:.6rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.8rem;max-width:72ch}
+.checks li{display:grid;grid-template-columns:1.15rem 1fr;gap:0 .7rem;font-size:.95rem;color:var(--ink-2)}
+.checks li::before{content:"";width:1.05rem;height:1.05rem;margin-top:.34rem;border:1px solid var(--line-strong);border-radius:3px;background:var(--surface)}
+.checks li b{color:var(--ink);font-weight:600;font-family:Archivo,sans-serif}
+.note{border-left:3px solid var(--amarillo);background:var(--amarillo-soft);color:var(--ink);padding:.9rem 1.05rem;border-radius:0 4px 4px 0;font-size:.93rem;max-width:66ch}
+.note b{font-family:Archivo,sans-serif}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:1.6rem 2.6rem;align-items:start}
+footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.5rem 0 2.5rem;color:var(--muted);font-size:.85rem}
+:focus-visible{outline:2px solid var(--celeste);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 32 32" role="img" aria-label="Raqueta de tenis">
+        <ellipse cx="16" cy="12" rx="9" ry="10.5" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--verde)"></ellipse>
+        <path d="M8.6 6.2c4.6 3 9.9 8.3 12.9 12.9M23.4 6.2c-4.6 3-9.9 8.3-12.9 12.9M7.2 12h17.6M16 2.2v19.6" stroke="currentColor" stroke-width="1" style="color:var(--celeste)" fill="none" opacity=".7"></path>
+        <path d="M13.6 21.4 12 30h8l-1.6-8.6z" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--verde)"></path>
+        <circle cx="26" cy="24.5" r="3" fill="var(--amarillo)"></circle>
+      </svg>
+      <span>Liga Dolorense de Tenis</span>
+    </div>
+    <h1>Después del MVP</h1>
+    <p class="lede">Catálogo de mejoras para proponerle a la liga una vez que el MVP esté presentado, ordenadas por lo que aportan al modelo: más visitas que vuelven, y más espacios vendibles. Cada una con su estimación y sus dependencias.</p>
+    <dl class="facts">
+      <div class="fact"><dt>Se puede hacer ya</dt><dd>8 <em>días-persona</em></dd></div>
+      <div class="fact"><dt>Espera la fase 2</dt><dd>5 <em>días-persona</em></dd></div>
+      <div class="fact"><dt>Monetización</dt><dd>3,5 <em>días-persona</em></dd></div>
+      <div class="fact"><dt>Primer paquete</dt><dd>2 <em>días-persona</em></dd></div>
+      <div class="fact"><dt>Estado</dt><dd>— <em>a la espera del feedback</em></dd></div>
+    </dl>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <div class="sec-head"><span class="num">00</span><h2>Cómo leer esto</h2></div>
+  <div class="grid2">
+    <div class="prose">
+      <p><strong>La métrica que paga no son los registros, son las visitas que vuelven.</strong> Un tenista que se registra y no entra nunca más no vale nada para el negocio; uno que entra todos los lunes a ver el ranking vale toda la temporada. Todo lo que sigue está ordenado por eso, no por lo que suena mejor en una demo.</p>
+      <p>Y hay un segundo criterio, que es cómo se vende: <strong>a un comercio de Dolores no lo convence un número de impresiones, lo convence que el sitio se vea vivo.</strong> Fotos del torneo, resultados frescos, tenistas con foto. Eso es lo que hace que renueve.</p>
+    </div>
+    <div class="prose">
+      <p><strong>Nada de esto entra en el MVP.</strong> El MVP se presenta como está y de ahí sale el feedback: qué le importa a la liga, qué no, y qué no habíamos visto. Esta lista es la conversación siguiente, y probablemente la mitad se reordene con lo que digan.</p>
+      <div class="note"><b>Depende de la fase 2.</b> Varias ideas necesitan partidos y torneos cargados en el sistema. Están separadas para no venderlas antes de tiempo: prometer un cara a cara sin partidos es prometer una pantalla vacía.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">01</span><h2>Se puede hacer ya</h2><p>No dependen de nada que falte</p></div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Mejora</th><th>Qué resuelve</th><th class="n">d-p</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="k">Compartir por WhatsApp</td>
+          <td>Botón en fichas, resultados y ranking. Cada tenista comparte su propia victoria: en un pueblo, eso es toda la distribución que hace falta y no cuesta un peso. Es la mejor relación tráfico/esfuerzo de toda la lista.</td>
+          <td class="n">0,5</td>
+        </tr>
+        <tr>
+          <td class="k">Imagen automática al compartir</td>
+          <td>Open Graph generado por jugador y por torneo. Pegar el link en WhatsApp muestra una tarjeta con el nombre y "Campeón Intermedia" en vez de texto pelado. Multiplica el clic de cada vez que alguien comparte.</td>
+          <td class="n">1,5</td>
+        </tr>
+        <tr>
+          <td class="k">Galería de fotos por torneo</td>
+          <td>Lo más subestimado de la lista. En una liga local la gente entra a buscarse, se etiqueta y comparte. Genera visitas repetidas sin que nadie escriba una palabra, y es el contenido que mejor se patrocina.</td>
+          <td class="n">2,5</td>
+        </tr>
+        <tr>
+          <td class="k">Aviso por mail</td>
+          <td>"Avisame cuando salga el ranking" y "te toca jugar". Retención real, sin depender de que el tenista se acuerde de entrar. Con Resend el costo es casi cero.</td>
+          <td class="n">2</td>
+        </tr>
+        <tr>
+          <td class="k">Historial en la ficha</td>
+          <td>Le da al tenista un motivo propio para registrarse: su ficha es su vidriera y aparece cuando alguien lo busca por nombre. Con una sola fecha de ranking ya muestra algo.</td>
+          <td class="n">1,5</td>
+        </tr>
+      </tbody>
+      <tfoot><tr><td colspan="2">Total del bloque</td><td class="n">8</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">02</span><h2>Espera la fase 2</h2><p>Necesitan partidos y resultados cargados</p></div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Mejora</th><th>Qué resuelve</th><th>Depende de</th><th class="n">d-p</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="k">Quién juega esta semana</td>
+          <td>Un motivo concreto para volver cada semana en vez de cada temporada. Va en la portada.</td>
+          <td>Fixture o partidos programados</td>
+          <td class="n">1,5</td>
+        </tr>
+        <tr>
+          <td class="k">Cara a cara</td>
+          <td>El historial entre dos tenistas. A los jugadores les encanta y se comparte solo.</td>
+          <td>Partidos con resultado</td>
+          <td class="n">1,5</td>
+        </tr>
+        <tr>
+          <td class="k">Evolución en el ranking</td>
+          <td>Cómo subió o bajó cada uno a lo largo de la temporada. Vuelve pegajoso el perfil.</td>
+          <td>Varias fechas de ranking</td>
+          <td class="n">2</td>
+        </tr>
+      </tbody>
+      <tfoot><tr><td colspan="3">Total del bloque</td><td class="n">5</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">03</span><h2>Subir el ingreso sin más tráfico</h2><p>Lo que más rinde por día de trabajo</p></div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Producto</th><th>Por qué se vende mejor</th><th class="n">d-p</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="k">Sponsor por torneo <span class="chip plata">Lo primero</span></td>
+          <td>"Torneo Grido de Dobles". Se vende mucho más fácil que un banner porque el comercio compra un evento, no un espacio: sale en el nombre, en las fotos y en cada vez que alguien comparte el resultado. Es el producto más caro que se puede ofrecer y uno de los más baratos de construir, porque los torneos ya están en el sistema.</td>
+          <td class="n">1,5</td>
+        </tr>
+        <tr>
+          <td class="k">Contenido patrocinado</td>
+          <td>"La foto del partido, presentada por X". El sponsor viaja pegado a lo que más se comparte, en lugar de competir por atención con el contenido.</td>
+          <td class="n">1</td>
+        </tr>
+        <tr>
+          <td class="k">Segmentación por cuadro</td>
+          <td>Un aviso solo en los cuadros de damas, o solo en 4ta y 5ta donde está el grueso de los inscriptos. Permite vender el mismo espacio dos veces a dos comercios distintos.</td>
+          <td class="n">1</td>
+        </tr>
+        <tr>
+          <td class="k">Sponsor de categoría</td>
+          <td>"1ra Caballeros presentada por…". Ya estaba anotado como opcional en la planificación del MVP.</td>
+          <td class="n">1</td>
+        </tr>
+        <tr>
+          <td class="k">Métricas al anunciante <span class="chip hecho">Ya en el sprint 5</span></td>
+          <td>Impresiones y clics para mostrarle en la renovación. Sin números, cada temporada se arranca la venta de cero. No se suma al total porque ya está comprometido.</td>
+          <td class="n">—</td>
+        </tr>
+      </tbody>
+      <tfoot><tr><td colspan="2">Total del bloque</td><td class="n">3,5</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">04</span><h2>Paquetes recomendados</h2><p>En este orden, y no todos juntos</p></div>
+  <div class="paquetes">
+    <div class="paq">
+      <div class="cab"><h3>Que se comparta</h3><span class="dp">2 d-p</span></div>
+      <ul>
+        <li>Compartir por WhatsApp</li>
+        <li>Imagen automática al compartir</li>
+      </ul>
+      <p class="pie">Lo primero, sin discusión: es lo que más tráfico trae por peso y no depende de nada. Dos días para que cada resultado circule solo por los grupos de WhatsApp de la liga.</p>
+    </div>
+    <div class="paq">
+      <div class="cab"><h3>Que se vea vivo</h3><span class="dp">4 d-p</span></div>
+      <ul>
+        <li>Galería de fotos por torneo</li>
+        <li>Sponsor por torneo</li>
+      </ul>
+      <p class="pie">El paquete que sostiene la venta: fotos que la gente busca, y el producto publicitario más caro montado encima de ellas. Se venden juntos.</p>
+    </div>
+    <div class="paq">
+      <div class="cab"><h3>Que vuelvan</h3><span class="dp">3,5 d-p</span></div>
+      <ul>
+        <li>Aviso por mail</li>
+        <li>Historial en la ficha</li>
+      </ul>
+      <p class="pie">Retención. Tiene sentido recién cuando haya suficientes tenistas registrados como para que valga avisarles algo.</p>
+    </div>
+    <div class="paq">
+      <div class="cab"><h3>Con la fase 2</h3><span class="dp">5 d-p</span></div>
+      <ul>
+        <li>Quién juega esta semana</li>
+        <li>Cara a cara</li>
+        <li>Evolución en el ranking</li>
+      </ul>
+      <p class="pie">Se propone junto con la fase 2 de torneos y partidos, no antes: sin partidos cargados son tres pantallas vacías.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">05</span><h2>El riesgo que ninguna mejora arregla</h2></div>
+  <div class="prose">
+    <p><strong>Si los resultados tardan dos semanas en publicarse, nadie vuelve y ninguna de estas ideas sirve.</strong> El sitio de una liga vive de la frescura del dato, y el cuello de botella no es técnico: es cuánto trabajo le cuesta a la organización cargar un resultado.</p>
+    <p>De ahí sale la prioridad número uno del panel de administración: <strong>que cargar el campeón de un cuadro lleve dos minutos desde el teléfono</strong>, no diez desde una computadora. Eso vale más que todo el resto de este documento junto, y no aparece en ninguna demo.</p>
+    <div class="note"><b>Cómo se mide.</b> Vale la pena mirar una sola cosa después de cada torneo: cuántos días pasaron entre la final y la publicación del resultado. Si ese número baja, el resto funciona. Si sube, no hay feature que lo compense.</div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">06</span><h2>Los números del negocio</h2><p>Para no vender expectativas de más</p></div>
+  <div class="grid2">
+    <div class="prose">
+      <h3 style="color:var(--ink)">Lo que cuesta sostenerlo</h3>
+      <p><strong>USD 0 por mes</strong> arrancando: los planes gratuitos de Vercel y Supabase alcanzan de sobra para el tamaño de la liga. <strong>Unos USD 45 por mes</strong> si en algún momento se pasan los límites, más el dominio, unos USD 15 al año.</p>
+      <p>Con <strong>dos o tres sponsors locales</strong> está cubierto todo el año. Del cuarto en adelante es ingreso para la liga.</p>
+    </div>
+    <div class="prose">
+      <h3 style="color:var(--ink)">Lo que no va a funcionar</h3>
+      <p><strong>Google AdSense.</strong> Dolores tiene alrededor de 30.000 habitantes y el sitio va a hacer unos cientos o pocos miles de visitas al mes. A esa escala AdSense paga centavos y encima mete avisos de casinos al lado de las fotos de los chicos.</p>
+      <p>El modelo es <strong>venta directa a comercios locales, cobrada por temporada</strong>, no por impresión. Con tres sponsors bien vendidos se junta más que con todo el tráfico monetizado por CPM.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">07</span><h2>Qué preguntar en la presentación</h2><p>El feedback que más cambia el plan</p></div>
+  <ul class="checks">
+    <li><span><b>¿La lista de cuadros está bien?</b> Están activos Intermedia y 1ra a 5ta en caballeros, y 1ra y 4ta en damas. Los otros cuatro de damas quedaron cargados pero inactivos.</span></li>
+    <li><span><b>¿Cuántos puntos da cada instancia de un torneo?</b> Ganar, final, semis. Es lo único que falta para cerrar la fase 2 en firme.</span></li>
+    <li><span><b>¿Quién va a cargar los resultados, y desde qué?</b> Teléfono o computadora. La respuesta decide cómo se diseña el panel, y es la que más impacto tiene en que el sitio funcione.</span></li>
+    <li><span><b>¿Tienen fotos de los torneos anteriores?</b> Si aparecen dos temporadas de fotos, la galería sube al primer lugar de la lista.</span></li>
+    <li><span><b>¿Hay sponsors ya comprometidos, o hay que salir a buscarlos?</b> Cambia si conviene construir la rotación completa o alcanza con dos espacios fijos.</span></li>
+    <li><span><b>¿Les sirve que el alta la haga cada tenista?</b> Hoy el admin aprueba antes de publicar. Si prefieren cargar ellos el padrón completo, el registro pasa a ser secundario y el plan cambia bastante.</span></li>
+    <li><span><b>¿Qué esperan ver en la portada un lunes a la mañana?</b> Es la pregunta que más ordena el producto, y la única que no se puede contestar sin ellos.</span></li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="wrap">Propuestas posteriores al MVP · Liga Dolorense de Tenis · Estimaciones en días-persona de 6 horas efectivas. Nada de este documento está comprometido: es el material para la conversación que sigue a la presentación.</footer>

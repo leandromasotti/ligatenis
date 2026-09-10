@@ -1,0 +1,531 @@
+<title>Liga Dolorense de Tenis</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#FBFCFA;
+  --surface:#FFFFFF;
+  --surface-2:#F2F6F1;
+  --ink:#12211A;
+  --ink-2:#3E4F46;
+  --muted:#6B7C72;
+  --line:#DCE5DE;
+  --line-strong:#BFCDC3;
+  --verde:#16794A;
+  --verde-soft:#E4F1E9;
+  --celeste:#0E7391;
+  --celeste-soft:#E1F1F6;
+  --amarillo:#F2C200;
+  --amarillo-soft:#FBF1CC;
+  --amarillo-ink:#5C4600;
+  --shadow:0 1px 2px rgba(18,33,26,.05);
+  --maxw:74rem;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B1310;
+    --surface:#121D18;
+    --surface-2:#18261F;
+    --ink:#E7EFE9;
+    --ink-2:#B7C6BC;
+    --muted:#8A9C91;
+    --line:#25352C;
+    --line-strong:#3A4E42;
+    --verde:#5CC98C;
+    --verde-soft:#14301F;
+    --celeste:#63C6E2;
+    --celeste-soft:#0F2A33;
+    --amarillo:#F5CE3A;
+    --amarillo-soft:#332A08;
+    --amarillo-ink:#F5CE3A;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B1310;
+  --surface:#121D18;
+  --surface-2:#18261F;
+  --ink:#E7EFE9;
+  --ink-2:#B7C6BC;
+  --muted:#8A9C91;
+  --line:#25352C;
+  --line-strong:#3A4E42;
+  --verde:#5CC98C;
+  --verde-soft:#14301F;
+  --celeste:#63C6E2;
+  --celeste-soft:#0F2A33;
+  --amarillo:#F5CE3A;
+  --amarillo-soft:#332A08;
+  --amarillo-ink:#F5CE3A;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  font-size:16.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+h1,h2,h3,h4{font-family:Archivo,"Arial Narrow",system-ui,sans-serif;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,5.4vw,3.4rem);font-weight:700;letter-spacing:-.026em;line-height:1.04}
+h2{font-size:clamp(1.35rem,2.6vw,1.72rem);font-weight:600;letter-spacing:-.017em;line-height:1.15}
+h3{font-size:1.06rem;font-weight:600;letter-spacing:-.008em}
+p{margin:0}
+a{color:var(--celeste)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums}
+
+/* ---------- header ---------- */
+header.top{border-bottom:1px solid var(--line);background:var(--surface)}
+.top-inner{display:flex;flex-direction:column;gap:1.6rem;padding-top:clamp(2rem,5vw,3.4rem);padding-bottom:clamp(1.7rem,4vw,2.6rem)}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand svg{flex:none}
+.brand span{font-family:Archivo,sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--verde)}
+.lede{max-width:60ch;color:var(--ink-2);font-size:1.08rem}
+.facts{display:flex;flex-wrap:wrap;gap:0 2.4rem;border-top:1px solid var(--line);padding-top:1.15rem}
+.fact{display:flex;flex-direction:column;gap:.1rem;padding:.35rem 0}
+.fact dt{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.fact dd{margin:0;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:1.02rem;color:var(--ink)}
+.fact dd em{font-style:normal;color:var(--muted);font-size:.82rem}
+
+/* ---------- sections ---------- */
+main{padding-bottom:4rem}
+section{padding-top:clamp(2.4rem,5vw,3.5rem)}
+.sec-head{display:flex;align-items:baseline;gap:.85rem;margin-bottom:1.1rem;flex-wrap:wrap}
+.sec-head .num{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--verde);border:1px solid var(--line-strong);border-radius:3px;padding:.1rem .38rem;flex:none;letter-spacing:.02em}
+.sec-head p{color:var(--muted);font-size:.9rem}
+.prose{max-width:66ch;display:flex;flex-direction:column;gap:.85rem;color:var(--ink-2)}
+.prose strong{color:var(--ink);font-weight:600}
+
+/* ---------- tables ---------- */
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:38rem;font-size:.94rem}
+thead th{
+  text-align:left;font-family:Archivo,sans-serif;font-weight:600;font-size:.7rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  padding:.7rem .9rem;border-bottom:1px solid var(--line-strong);white-space:nowrap;
+}
+tbody td{padding:.66rem .9rem;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:none}
+td.k{color:var(--ink);font-weight:600}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+tfoot td{padding:.7rem .9rem;border-top:1px solid var(--line-strong);font-weight:600;color:var(--ink);background:var(--surface-2)}
+tfoot td.n{font-family:"IBM Plex Mono",monospace}
+.code{font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--verde)}
+
+/* ---------- epic list ---------- */
+.epics{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow)}
+.epic{display:grid;grid-template-columns:3.4rem 1fr 5.2rem;gap:0 1rem;padding:1rem 1.1rem;border-bottom:1px solid var(--line);align-items:start}
+.epic .id{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--verde);padding-top:.12rem}
+.epic .body{display:flex;flex-direction:column;gap:.4rem;min-width:0}
+.epic h3{color:var(--ink)}
+.epic ul{margin:0;padding-left:1.1rem;color:var(--ink-2);font-size:.9rem;display:flex;flex-direction:column;gap:.15rem}
+.epic .dp{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:right;font-size:1.02rem;color:var(--ink)}
+.epic .dp em{display:block;font-style:normal;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-family:"Source Sans 3",sans-serif}
+.total-bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;background:var(--verde-soft);border-top:1px solid var(--line-strong);padding:.9rem 1.1rem;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink);font-size:.95rem}
+.total-bar b{font-family:Archivo,sans-serif;font-weight:600}
+
+/* ---------- sprints ---------- */
+.sprints{display:flex;flex-direction:column;gap:0}
+.sprint{display:grid;grid-template-columns:auto 1fr;gap:0 1.2rem;padding:0 0 1.3rem 0;position:relative}
+.sprint .dot{width:2.1rem;height:2.1rem;border-radius:50%;background:var(--surface);border:1px solid var(--line-strong);display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-size:.85rem;color:var(--verde);z-index:1}
+.sprint:not(:last-child)::before{content:"";position:absolute;left:1.05rem;top:2.1rem;bottom:0;width:1px;background:var(--line)}
+.sprint .sbody{display:flex;flex-direction:column;gap:.3rem;padding-bottom:.4rem;min-width:0}
+.sprint .shead{display:flex;flex-wrap:wrap;align-items:baseline;gap:.55rem}
+.sprint .shead .dp{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--muted)}
+.sprint p{font-size:.94rem;color:var(--ink-2);max-width:62ch}
+.split{display:flex;flex-wrap:wrap;gap:.35rem 1.4rem;margin-top:.35rem;font-size:.86rem}
+.split span{color:var(--ink-2)}
+.split b{font-family:Archivo,sans-serif;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--celeste);margin-right:.35rem}
+
+/* ---------- chips / lists ---------- */
+.chip{display:inline-block;font-family:Archivo,sans-serif;font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.16rem .42rem;border-radius:3px;white-space:nowrap}
+.chip.alta{background:var(--amarillo-soft);color:var(--amarillo-ink)}
+.chip.media{background:var(--celeste-soft);color:var(--celeste)}
+.chip.baja{background:var(--surface-2);color:var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:1.6rem 2.6rem;align-items:start}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.8rem;max-width:72ch}
+.checks li{display:grid;grid-template-columns:1.15rem 1fr;gap:0 .7rem;font-size:.95rem;color:var(--ink-2)}
+.checks li::before{content:"";width:1.05rem;height:1.05rem;margin-top:.34rem;border:1px solid var(--line-strong);border-radius:3px;background:var(--surface)}
+.checks li b{color:var(--ink);font-weight:600;font-family:Archivo,sans-serif}
+.note{border-left:3px solid var(--amarillo);background:var(--amarillo-soft);color:var(--ink);padding:.85rem 1rem;border-radius:0 4px 4px 0;font-size:.93rem;max-width:66ch}
+.note b{font-family:Archivo,sans-serif}
+.pal{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.45rem}
+.sw{display:flex;align-items:center;gap:.45rem;border:1px solid var(--line);border-radius:4px;padding:.26rem .5rem .26rem .32rem;background:var(--surface);font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--ink-2)}
+.sw i{width:1.05rem;height:1.05rem;border-radius:2px;display:block;border:1px solid rgba(120,140,130,.4)}
+footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.5rem 0 2.5rem;color:var(--muted);font-size:.85rem}
+@media (max-width:34rem){
+  .epic{grid-template-columns:2.6rem 1fr;gap:.5rem 0}
+  .epic .dp{grid-column:2;text-align:left;display:flex;gap:.35rem;align-items:baseline}
+  .epic .dp em{display:inline}
+  table{min-width:30rem}
+}
+:focus-visible{outline:2px solid var(--celeste);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 32 32" role="img" aria-label="Raqueta de tenis">
+        <ellipse cx="16" cy="12" rx="9" ry="10.5" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--verde)"></ellipse>
+        <path d="M8.6 6.2c4.6 3 9.9 8.3 12.9 12.9M23.4 6.2c-4.6 3-9.9 8.3-12.9 12.9M7.2 12h17.6M16 2.2v19.6" stroke="currentColor" stroke-width="1" style="color:var(--celeste)" fill="none" opacity=".7"></path>
+        <path d="M13.6 21.4 12 30h8l-1.6-8.6z" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--verde)"></path>
+        <circle cx="26" cy="24.5" r="3" fill="var(--amarillo)"></circle>
+      </svg>
+      <span>Liga Dolorense de Tenis</span>
+    </div>
+    <h1>Planificación y estimación del MVP</h1>
+    <p class="lede">Aplicación web responsive con los cuadros de categoría de la liga, perfiles cargados por los propios tenistas, ranking, equipo técnico y espacios publicitarios con rotación de sponsors. Dos desarrolladores full stack, Next.js + Supabase.</p>
+    <dl class="facts">
+      <div class="fact"><dt>Esfuerzo base</dt><dd>50,5 <em>días-persona</em></dd></div>
+      <div class="fact"><dt>Con buffer 15%</dt><dd>58 <em>días-persona</em></dd></div>
+      <div class="fact"><dt>Equipo</dt><dd>2 <em>full stack</em></dd></div>
+      <div class="fact"><dt>Sprints</dt><dd>6 <em>de 8 a 11 d-p</em></dd></div>
+      <div class="fact"><dt>Estado</dt><dd>1/6 <em>sprint 1 hecho</em></dd></div>
+      <div class="fact"><dt>Fecha objetivo</dt><dd>— <em>a definir</em></dd></div>
+    </dl>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <div class="sec-head"><span class="num">00</span><h2>Qué cambió</h2><p>Revisión del 8 de septiembre de 2026</p></div>
+  <div class="prose" style="margin-bottom:1.2rem">
+    <p>El <strong>sprint 1 está terminado</strong>: proyecto, sistema de diseño con tema oscuro, logo, layout responsive, el esqueleto de todas las secciones públicas, el esquema completo de la base con RLS y el CI. Al revisar información pública de la liga aparecieron seis diferencias con lo que se había supuesto, y el modelo de datos ya está corregido.</p>
+  </div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Tema</th><th>Se había supuesto</th><th>Lo que dice la información pública</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Nombre</td><td>Liga de Tenis de Dolores</td><td>Liga Dolorense de Tenis</td></tr>
+        <tr><td class="k">Categorías</td><td>Tres niveles: 1ra a 3ra</td><td>1ra a 5ta más Intermedia</td></tr>
+        <tr><td class="k">Modalidad</td><td>Solo singles</td><td>Singles y dobles</td></tr>
+        <tr><td class="k">Alcance</td><td>Tenistas de Dolores</td><td>También de Castelli, Pila, Chascomús y la zona</td></tr>
+        <tr><td class="k">Sedes</td><td>Un club sin identificar</td><td>Club Sarmiento, Club Atlético Ever Ready, Club Social, Polideportivo Municipal y Naytuel</td></tr>
+        <tr><td class="k">Competencia</td><td>Liga por temporada con ranking</td><td>Torneos, y el ranking se calcula con sus puntos (confirmado por la organización)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note" style="margin-top:1.1rem"><b>A confirmar.</b> Todo esto sale del Facebook oficial de la liga y de la prensa local (Criterio Online, 2245). Hay que validarlo con la organización antes de darlo por cerrado. El costo de haberlo detectado ahora es cero; en el sprint 3, con pantallas escritas encima, habrían sido varios días.</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">01</span><h2>Alcance</h2></div>
+  <div class="grid2">
+    <div class="prose">
+      <h3 style="color:var(--ink)">Entra en el MVP</h3>
+      <p><strong>Los cuadros de singles de la liga:</strong> 1ra a 5ta e Intermedia, en Damas y Caballeros. Cada tenista pertenece a un cuadro por temporada. Cuáles están publicados lo decide la organización desde el panel, no el código.</p>
+      <p><strong>Alta propia del tenista:</strong> se registra con su email, completa sus datos personales, sube su foto y declara su categoría, su club y su localidad. El administrador aprueba antes de que aparezca en el sitio público.</p>
+      <p><strong>Ranking por categoría</strong> cargado por el administrador: import de Excel más edición manual. Sin cálculo automático de puntos en esta fase.</p>
+      <p><strong>Equipo técnico</strong> como sección de contenido, <strong>publicidades con rotación de sponsors</strong>, <strong>modo oscuro</strong> y todo el sitio en español.</p>
+    </div>
+    <div class="prose">
+      <h3 style="color:var(--ink)">Queda para la fase 2</h3>
+      <p>Torneos: cuadros, llaves, carga de resultados y <strong>el cálculo del ranking a partir de ellos</strong> — confirmado por la organización: los puntos salen de los torneos. Es el corazón de la actividad real de la liga, así que se estima aparte al final del documento.</p>
+      <p><strong>Dobles no lleva ranking</strong> en esta versión, por decisión de la liga: se juega por torneo y nada más. El modelo ya distingue singles de dobles, así que abrir esos cuadros más adelante no obliga a migrar nada.</p>
+      <p>Y afuera del alcance: app móvil nativa, cobro de cuotas, notificaciones push e historial de temporadas anteriores a la primera cargada.</p>
+      <div class="note"><b>Decisión de arquitectura.</b> El ranking se modela desde el día uno como una tabla de posiciones editable, desacoplada del origen de los puntos. Cuando aparezca el reglamento, la fase 2 llena esa tabla con un cálculo en vez de un import, sin rehacer las pantallas públicas.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">02</span><h2>Stack</h2><p>Elegido por tiempo de puesta en marcha</p></div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Capa</th><th>Elección</th><th>Por qué esta</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Framework</td><td class="code">Next.js 16 · App Router · TypeScript</td><td>Front y back en un solo repo con Server Actions. SEO real en las páginas públicas de jugadores y ranking. El equipo ya tiene experiencia en React/Next, así que no hay curva de aprendizaje que estimar.</td></tr>
+        <tr><td class="k">Estilos</td><td class="code">Tailwind CSS v4 + shadcn/ui</td><td>Componentes accesibles copiados al repo. La paleta verde/celeste/amarillo se define una vez como variables CSS y el modo oscuro sale con <span class="code">next-themes</span>.</td></tr>
+        <tr><td class="k">Datos y auth</td><td class="code">Supabase · Postgres + Auth + Storage</td><td>Registro con email y Google, recupero de contraseña y permisos por fila (RLS) sin escribir backend. Las fotos van a Storage. Es Postgres puro, así que migrar más adelante no queda bloqueado.</td></tr>
+        <tr><td class="k">Formularios</td><td class="code">React Hook Form + Zod</td><td>Un mismo esquema valida en el cliente y en el servidor, y se reutiliza para validar las filas del Excel del cliente.</td></tr>
+        <tr><td class="k">Tablas</td><td class="code">TanStack Table</td><td>Orden y filtros del ranking y del listado de jugadores sin escribirlos a mano.</td></tr>
+        <tr><td class="k">Import de Excel</td><td class="code">SheetJS (xlsx)</td><td>Lee el .xlsx en el navegador, muestra vista previa y marca las filas con error antes de escribir en la base.</td></tr>
+        <tr><td class="k">Infraestructura</td><td class="code">Vercel + Supabase cloud</td><td>Deploy por push y preview por pull request. Los planes gratuitos alcanzan para el tamaño de la liga; el costo aparece con mucho tráfico o muchas fotos.</td></tr>
+        <tr><td class="k">Calidad</td><td class="code">Vitest · Playwright · Sentry</td><td>Tests de las reglas de negocio y de los tres flujos críticos: registro, carga de perfil e import de ranking.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose" style="margin-top:1.1rem">
+    <p><strong>Alternativa considerada y descartada:</strong> Prisma + Postgres propio + Auth.js. Da más control, pero suma cerca de una semana-persona construyendo a mano lo que Supabase ya trae resuelto: verificación de email, recupero, storage de imágenes y permisos por fila.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">03</span><h2>Modelo de datos</h2><p>Diez tablas en el MVP</p></div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Tabla</th><th>Campos principales</th><th>Visibilidad</th></tr></thead>
+      <tbody>
+        <tr><td class="k">profiles</td><td>nombre, apellido, foto, mano hábil, revés, club, localidad, bio, instagram, estado (pendiente / aprobado / inactivo), rol</td><td>Pública</td></tr>
+        <tr><td class="k">profiles_privados</td><td>DNI, fecha de nacimiento, teléfono, dirección, contacto de emergencia</td><td>Solo el titular y el admin</td></tr>
+        <tr><td class="k">clubes</td><td>nombre, localidad, si es sede, orden</td><td>Pública · las 5 sedes</td></tr>
+        <tr><td class="k">categorias</td><td>nivel (texto: 1ra a 5ta, Intermedia), género, modalidad (singles / dobles), orden, activa</td><td>Pública · administrable</td></tr>
+        <tr><td class="k">temporadas</td><td>nombre, desde, hasta, activa</td><td>Pública</td></tr>
+        <tr><td class="k">inscripciones</td><td>jugador, categoría, temporada, estado</td><td>Pública</td></tr>
+        <tr><td class="k">ranking</td><td>temporada, categoría, jugador, posición, puntos, partidos jugados, posición anterior</td><td>Pública · escritura solo admin</td></tr>
+        <tr><td class="k">equipo_tecnico</td><td>nombre, rol, foto, bio, orden</td><td>Pública</td></tr>
+        <tr><td class="k">anuncios</td><td>título, imagen, link, slot, orden, vigencia desde/hasta, activo</td><td>Pública</td></tr>
+        <tr><td class="k">anuncios_eventos</td><td>anuncio, tipo (impresión / clic), fecha</td><td>Solo admin</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note" style="margin-top:1.1rem"><b>Datos personales.</b> Separar los campos sensibles en su propia tabla es lo que permite servir la ficha pública del jugador sin riesgo de filtrar DNI o teléfono, incluso si mañana se agrega una API. Cuesta media hora ahora y es caro de revertir después.</div>
+  <div class="prose" style="margin-top:1rem">
+    <p><strong>El nivel de categoría es texto, no un valor fijo del código.</strong> Fue el cambio más importante que trajo la revisión: la lista de cuadros la define la organización, y sumar 4ta, 5ta o Intermedia es insertar una fila, no tocar el esquema. Los doce cuadros de singles ya están cargados; los que todavía no tienen actividad publicada quedan inactivos y no se muestran.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">04</span><h2>Épicas y estimación</h2><p>1 día-persona = 6 horas efectivas</p></div>
+  <div class="epics">
+    <div class="epic">
+      <div class="id">E0</div>
+      <div class="body">
+        <h3>Fundaciones y diseño base <span class="chip" style="background:var(--verde-soft);color:var(--verde);vertical-align:middle">Hecho</span></h3>
+        <ul>
+          <li>Repo, Next 15, TypeScript, ESLint/Prettier, CI y deploy en Vercel</li>
+          <li>Paleta verde/celeste/amarillo sobre blanco, tokens, tipografía y modo oscuro</li>
+          <li>Logo raqueta en SVG, favicon y variantes para tema claro y oscuro</li>
+          <li>Layout responsive: header con navegación, footer, contenedores de página</li>
+        </ul>
+      </div>
+      <div class="dp">6<em>d-p</em></div>
+    </div>
+    <div class="epic">
+      <div class="id">E1</div>
+      <div class="body">
+        <h3>Cuentas y perfil del tenista <span class="chip" style="background:var(--verde-soft);color:var(--verde);vertical-align:middle">Base hecha</span></h3>
+        <ul>
+          <li>Proyecto Supabase, esquema, migraciones y políticas RLS</li>
+          <li>Registro, login, logout, verificación de email y recupero de contraseña</li>
+          <li>Onboarding en pasos: datos personales, categoría declarada, foto</li>
+          <li>Subida de foto con recorte, límite de peso y conversión a WebP</li>
+          <li>Mi perfil editable, con los campos privados marcados como tales</li>
+          <li>Estados de cuenta y aprobación por parte del administrador</li>
+        </ul>
+      </div>
+      <div class="dp">10<em>d-p</em></div>
+    </div>
+    <div class="epic">
+      <div class="id">E2</div>
+      <div class="body">
+        <h3>Categorías y jugadores (público)</h3>
+        <ul>
+          <li>Seis cuadros de categoría con buscador y filtros</li>
+          <li>Ficha pública del jugador con su posición y datos deportivos</li>
+          <li>Home con accesos a categorías, ranking y equipo técnico</li>
+          <li>Metadata, Open Graph y sitemap</li>
+        </ul>
+      </div>
+      <div class="dp">5<em>d-p</em></div>
+    </div>
+    <div class="epic">
+      <div class="id">E3</div>
+      <div class="body">
+        <h3>Ranking</h3>
+        <ul>
+          <li>Carga y edición de posiciones desde el panel</li>
+          <li>Import de Excel con vista previa, validación fila por fila y reporte de errores</li>
+          <li>Tabla pública por categoría: orden, empates, variación respecto de la fecha anterior y versión responsive</li>
+          <li>Selector de temporada</li>
+        </ul>
+      </div>
+      <div class="dp">7,5<em>d-p</em></div>
+    </div>
+    <div class="epic">
+      <div class="id">E4</div>
+      <div class="body">
+        <h3>Equipo técnico</h3>
+        <ul><li>Sección pública con fichas ordenables y carga desde el panel</li></ul>
+      </div>
+      <div class="dp">1,5<em>d-p</em></div>
+    </div>
+    <div class="epic">
+      <div class="id">E5</div>
+      <div class="body">
+        <h3>Publicidades</h3>
+        <ul>
+          <li>Cuatro slots reutilizables con medidas IAB: cabecera 970×90, listado 728×90, lateral 300×600 y pie 970×250</li>
+          <li>Alta de banner con imagen, link, vigencia y orden</li>
+          <li>Rotación con peso por sponsor: varios anunciantes comparten un mismo espacio</li>
+          <li>Muro de sponsors y tira de logos en el pie</li>
+          <li>Conteo de impresiones y clics, con resumen en el panel</li>
+        </ul>
+      </div>
+      <div class="dp">6,5<em>d-p</em></div>
+    </div>
+    <div class="epic">
+      <div class="id">E6</div>
+      <div class="body">
+        <h3>Panel de administración</h3>
+        <ul>
+          <li>Layout del panel y guardas por rol</li>
+          <li>Jugadores: alta manual, edición, activar/desactivar, mover de categoría</li>
+          <li>Temporadas y categorías</li>
+          <li>Moderación de altas nuevas y de fotos subidas</li>
+        </ul>
+      </div>
+      <div class="dp">6<em>d-p</em></div>
+    </div>
+    <div class="epic">
+      <div class="id">E7</div>
+      <div class="body">
+        <h3>Calidad y lanzamiento</h3>
+        <ul>
+          <li>Repaso de accesibilidad y responsive en los dos temas</li>
+          <li>Tests unitarios y end-to-end de registro, perfil e import</li>
+          <li>Política de privacidad, términos y consentimiento de datos personales</li>
+          <li>Carga de datos reales junto al cliente y acompañamiento inicial</li>
+          <li>Dominio, analytics y monitoreo de errores</li>
+        </ul>
+      </div>
+      <div class="dp">8<em>d-p</em></div>
+    </div>
+    <div class="total-bar">
+      <span><b>Base</b> 50,5 días-persona</span>
+      <span><b>Buffer</b> +15% por lo no previsto</span>
+      <span><b>Total</b> 58 d-p ≈ 29 por desarrollador</span>
+    </div>
+  </div>
+  <div class="prose" style="margin-top:1rem">
+    <p>Subió 2,5 d-p respecto de la primera estimación, y todo el aumento está en publicidades: la rotación de sponsors y el muro de logos. Es la parte que financia el sitio, así que conviene tenerla desde el arranque. <strong>Los cuadros extra no costaron nada</strong> porque el modelo quedó administrable. Opcional aparte: sponsor por categoría, 1 d-p; dobles con parejas y ranking propio, 5 d-p.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">05</span><h2>Calendario según dedicación</h2><p>Sin fecha objetivo, el plazo lo define cuántas horas entran por semana</p></div>
+  <div class="tbl-scroll">
+    <table style="min-width:30rem">
+      <thead><tr><th>Dedicación por desarrollador</th><th class="n">Avance semanal</th><th class="n">Duración del MVP</th></tr></thead>
+      <tbody>
+        <tr><td class="k">10 h/semana</td><td class="n">3,3 d-p</td><td class="n">~18 semanas</td></tr>
+        <tr><td class="k">20 h/semana</td><td class="n">6,7 d-p</td><td class="n">~9 semanas</td></tr>
+        <tr><td class="k">30 h/semana</td><td class="n">10 d-p</td><td class="n">~6 semanas</td></tr>
+        <tr><td class="k">40 h/semana</td><td class="n">13,3 d-p</td><td class="n">~5 semanas</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose" style="margin-top:1.1rem"><p>Los dos desarrolladores trabajan en paralelo casi todo el proyecto. La excepción es el sprint 1: conviene definir juntos el esquema de datos y el sistema de diseño antes de repartirse pantallas.</p></div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">06</span><h2>Plan de sprints</h2><p>Cada sprint cierra con algo desplegado y usable</p></div>
+  <div class="sprints">
+    <div class="sprint">
+      <div class="dot">1</div>
+      <div class="sbody">
+        <div class="shead"><h3>Fundaciones</h3><span class="dp">8 d-p</span><span class="chip" style="background:var(--verde-soft);color:var(--verde)">Terminado</span></div>
+        <p>Sitio desplegado con tema claro y oscuro, logo, navegación y el esqueleto de todas las secciones públicas. Esquema completo de la base con RLS, los cuadros y las sedes cargados, y el CI corriendo formato, lint, tipos y build.</p>
+        <div class="split"><span><b>Dev A</b>diseño base, layout, logo</span><span><b>Dev B</b>Supabase, esquema, RLS, CI</span></div>
+      </div>
+    </div>
+    <div class="sprint">
+      <div class="dot">2</div>
+      <div class="sbody">
+        <div class="shead"><h3>Cuentas</h3><span class="dp">8 d-p</span></div>
+        <p>Un tenista puede registrarse, completar sus datos, subir su foto y ver su perfil. Queda pendiente de aprobación del administrador.</p>
+        <div class="split"><span><b>Dev A</b>onboarding, mi perfil, foto</span><span><b>Dev B</b>auth, emails, estados, permisos</span></div>
+      </div>
+    </div>
+    <div class="sprint">
+      <div class="dot">3</div>
+      <div class="sbody">
+        <div class="shead"><h3>Sitio público</h3><span class="dp">8 d-p</span></div>
+        <p>Home, los cuadros de categoría, ficha de tenista y equipo técnico navegables. Los slots de publicidad ya están en el layout, todavía sin administrador.</p>
+        <div class="split"><span><b>Dev A</b>home, categorías, ficha, equipo técnico</span><span><b>Dev B</b>consultas, SEO, slots de anuncios</span></div>
+      </div>
+    </div>
+    <div class="sprint">
+      <div class="dot">4</div>
+      <div class="sbody">
+        <div class="shead"><h3>Ranking</h3><span class="dp">7,5 d-p</span></div>
+        <p>Tabla pública de posiciones por categoría y temporada, alimentada por el Excel del cliente. Primer sprint que depende de material externo.</p>
+        <div class="split"><span><b>Dev A</b>tabla pública, variaciones, responsive</span><span><b>Dev B</b>import de Excel, validaciones, edición</span></div>
+      </div>
+    </div>
+    <div class="sprint">
+      <div class="dot">5</div>
+      <div class="sbody">
+        <div class="shead"><h3>Administración y publicidad</h3><span class="dp">11 d-p</span></div>
+        <p>La liga ya puede operar el sitio sola: aprobar altas, abrir o cerrar cuadros, mover tenistas de categoría y publicar sponsors con vigencia y rotación. Es el sprint más cargado: si hace falta, se parte en dos.</p>
+        <div class="split"><span><b>Dev A</b>jugadores, cuadros y moderación</span><span><b>Dev B</b>sponsors, rotación, métricas, roles</span></div>
+      </div>
+    </div>
+    <div class="sprint">
+      <div class="dot">6</div>
+      <div class="sbody">
+        <div class="shead"><h3>Lanzamiento</h3><span class="dp">8 d-p</span></div>
+        <p>Tests, accesibilidad, textos legales, dominio propio, monitoreo y carga de los datos reales con el cliente.</p>
+        <div class="split"><span><b>Dev A</b>QA, accesibilidad, contenido</span><span><b>Dev B</b>tests e2e, infra, dominio, Sentry</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">07</span><h2>Riesgos</h2></div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Riesgo</th><th>Impacto</th><th>Cómo lo acotamos</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Falta la tabla de puntos por torneo</td><td><span class="chip media">Medio</span></td><td>Ya se sabe que el ranking se calcula con los puntos de los torneos; lo que falta es cuántos puntos da cada instancia. El MVP no lo necesita, porque las posiciones se cargan del Excel. Bloquea solo el cálculo automático de la fase 2.</td></tr>
+        <tr><td class="k">La estructura real de la liga sigue llegando de a poco</td><td><span class="chip alta">Alto</span></td><td>En una sola revisión aparecieron seis diferencias con lo supuesto. Mitigado: los cuadros, las sedes y las localidades son datos administrables, no código. Lo que falta es una conversación con la organización, no más desarrollo.</td></tr>
+        <tr><td class="k">Dobles queda afuera y la liga lo juega</td><td><span class="chip" style="background:var(--verde-soft);color:var(--verde)">Cerrado</span></td><td>Decidido por la organización: en esta versión dobles no lleva ranking. Se ahorran los 5 días-persona de parejas, y el modelo queda preparado por si más adelante cambia.</td></tr>
+        <tr><td class="k">El Excel del cliente llega sucio o incompleto</td><td><span class="chip alta">Alto</span></td><td>El importador muestra vista previa y errores por fila en lugar de fallar. Pedir el archivo ya, aunque sea un borrador, para conocer las columnas reales antes del sprint 4.</td></tr>
+        <tr><td class="k">Los tenistas no completan su perfil ni suben foto</td><td><span class="chip media">Medio</span></td><td>Perfiles incompletos visibles en el panel, avatar por defecto con iniciales y recordatorio por email. El sitio tiene que verse bien con el 40% de los perfiles vacíos.</td></tr>
+        <tr><td class="k">Altas falsas o duplicadas</td><td><span class="chip media">Medio</span></td><td>Verificación de email obligatoria más aprobación del administrador antes de aparecer en el sitio público.</td></tr>
+        <tr><td class="k">Manejo de datos personales (ley 25.326)</td><td><span class="chip media">Medio</span></td><td>Campos sensibles en tabla aparte, consentimiento explícito en el registro, política de privacidad y opción de baja de la cuenta.</td></tr>
+        <tr><td class="k">Fotos pesadas encarecen el storage</td><td><span class="chip baja">Bajo</span></td><td>Límite de 5 MB por archivo, recorte en el cliente y conversión a WebP antes de subir.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">08</span><h2>Decisiones pendientes</h2><p>Ninguna bloquea el sprint 2</p></div>
+  <div class="note" style="margin-bottom:1.2rem"><b>Ya decidido por la organización.</b> El ranking se calcula con los puntos de los torneos, no con una liga corrida por temporada. Y dobles no lleva ranking propio en esta versión: se juega por torneo. Las dos cosas achican la fase 2 y dejan el alcance del MVP sin cambios.</div>
+  <ul class="checks">
+    <li><span><b>La lista definitiva de cuadros.</b> Están cargados los doce de singles, con ocho activos. Falta que la organización confirme cuáles se juegan de verdad, sobre todo en damas.</span></li>
+    <li><span><b>Tabla de puntos por torneo.</b> Cuántos puntos da ganar, llegar a la final o a semis, si hay ascensos y descensos entre categorías, y cada cuánto se actualiza la tabla. Es lo único que falta para cerrar la fase 2 en firme.</span></li>
+    <li><span><b>Excel del cliente.</b> Pedirlo ahora, aunque esté a medias, para conocer columnas y calidad de los datos.</span></li>
+    <li><span><b>Quién maneja el Facebook de la liga.</b> Es el canal actual de comunicados y resultados, así que esa persona es probablemente la que va a administrar el sitio y cargar el contenido. Vale identificarla y sumarla temprano.</span></li>
+    <li><span><b>Publicidad.</b> Asumido: sponsors propios con rotación, cargados por el administrador. Si el cliente quiere Google AdSense, se resta 1 d-p de desarrollo y se suma la aprobación de Google, que puede demorar semanas; con el tráfico de una liga local, AdSense no llega a financiar nada.</span></li>
+    <li><span><b>Roles.</b> Asumido: tenista y administrador. Si el equipo técnico necesita entrar a cargar contenido, es un tercer rol y suma 1 d-p.</span></li>
+    <li><span><b>Aprobación de altas.</b> Asumido que el administrador aprueba antes de publicar. Si el alta es directa, se ahorra 1 d-p a cambio de perder control sobre quién aparece.</span></li>
+    <li><span><b>Marca.</b> ¿Existe logo de la liga o lo diseñamos? Colores propuestos para arrancar, ajustables en un solo archivo de tokens:
+      <span class="pal">
+        <span class="sw"><i style="background:#16794A"></i>#16794A verde</span>
+        <span class="sw"><i style="background:#0E7391"></i>#0E7391 celeste</span>
+        <span class="sw"><i style="background:#F2C200"></i>#F2C200 amarillo</span>
+        <span class="sw"><i style="background:#FFFFFF"></i>#FFFFFF fondo</span>
+        <span class="sw"><i style="background:#0B1310"></i>#0B1310 oscuro</span>
+      </span>
+    </span></li>
+    <li><span><b>Dominio y cuentas.</b> Quién compra el dominio y a nombre de quién quedan las cuentas de Vercel y Supabase.</span></li>
+    <li><span><b>Quién carga el contenido.</b> Fotos del equipo técnico, textos institucionales y datos iniciales. Suele ser el cuello de botella real del lanzamiento.</span></li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="num">09</span><h2>Fase 2 · Torneos</h2><p>El ranking se calcula con los puntos de los torneos · falta solo la tabla de puntos</p></div>
+  <div class="tbl-scroll">
+    <table style="min-width:32rem">
+      <thead><tr><th>Alcance</th><th>Qué incluye</th><th class="n">d-p</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Resultados <span class="chip" style="background:var(--verde-soft);color:var(--verde)">Necesario</span></td><td>Alta de torneos, carga de resultados por el administrador (sets y games), historial de partidos en la ficha del tenista y cara a cara entre dos jugadores</td><td class="n">10</td></tr>
+        <tr><td class="k">Cálculo del ranking <span class="chip" style="background:var(--verde-soft);color:var(--verde)">Necesario</span></td><td>Puntos por torneo según la tabla de la liga y recálculo automático del ranking, con la posición anterior guardada</td><td class="n">+6</td></tr>
+        <tr><td class="k">Torneos completos <span class="chip baja">Opcional</span></td><td>Llaves y calendario, inscripción online al torneo y carga de resultados por los propios jugadores con confirmación del rival</td><td class="n">+10</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="2">Fase 2 comprometida · con los opcionales</td><td class="n">16 – 26</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">Planificación del MVP · Liga Dolorense de Tenis · Estimaciones en días-persona de 6 horas efectivas, sujetas a las decisiones pendientes de la sección 08.</footer>

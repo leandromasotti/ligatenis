@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* next-themes escribe la clase `dark` en <html>, así que el variante `dark:` la sigue. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Identidad de la liga: verde cancha, celeste y amarillo pelota sobre fondo blanco.
+  Todos los colores se definen acá y una sola vez; los componentes usan los nombres
+  semánticos (bg-surface, text-verde, border-line) y nunca hex sueltos.
+*/
+:root {
+  --background: #ffffff;
+  --surface: #f7faf8;
+  --surface-2: #eef4f0;
+  --line: #e0e9e3;
+  --line-strong: #c4d2c9;
+  --foreground: #0f1d16;
+  --foreground-muted: #4e6058;
+  --muted: #6d7f75;
+
+  --verde: #157a4a;
+  --verde-hover: #10603a;
+  --verde-contrast: #ffffff;
+  --verde-soft: #e4f1e9;
+
+  --celeste: #0d7391;
+  --celeste-hover: #0a5c74;
+  --celeste-contrast: #ffffff;
+  --celeste-soft: #e0f0f6;
+
+  --amarillo: #f2c200;
+  --amarillo-soft: #fbf1cc;
+  --amarillo-ink: #4f3c00;
+
+  --ring: #0d7391;
+}
+
+.dark {
+  --background: #0b1310;
+  --surface: #121d18;
+  --surface-2: #18261f;
+  --line: #24342b;
+  --line-strong: #3a4e42;
+  --foreground: #e8efe9;
+  --foreground-muted: #b6c5bb;
+  --muted: #8a9c91;
+
+  --verde: #5cc98c;
+  --verde-hover: #7ad9a3;
+  --verde-contrast: #06120b;
+  --verde-soft: #14301f;
+
+  --celeste: #63c6e2;
+  --celeste-hover: #8bd8ee;
+  --celeste-contrast: #04161c;
+  --celeste-soft: #0f2a33;
+
+  --amarillo: #f5ce3a;
+  --amarillo-soft: #33290a;
+  --amarillo-ink: #f5ce3a;
+
+  --ring: #63c6e2;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-muted: var(--muted);
+
+  --color-verde: var(--verde);
+  --color-verde-hover: var(--verde-hover);
+  --color-verde-contrast: var(--verde-contrast);
+  --color-verde-soft: var(--verde-soft);
+
+  --color-celeste: var(--celeste);
+  --color-celeste-hover: var(--celeste-hover);
+  --color-celeste-contrast: var(--celeste-contrast);
+  --color-celeste-soft: var(--celeste-soft);
+
+  --color-amarillo: var(--amarillo);
+  --color-amarillo-soft: var(--amarillo-soft);
+  --color-amarillo-ink: var(--amarillo-ink);
+
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), "Arial Narrow", ui-sans-serif, sans-serif;
+
+  --radius-card: 0.5rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.018em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
